@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Shelf from './Shelf'
@@ -8,7 +8,7 @@ class BooksApp extends React.Component {
 
   state = {
     books: [],
-    currentBooks: [],
+    //currentBooks: [],
 
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -26,8 +26,8 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) => {
       this.setState( {books} )
 
-      const currentlyReadingBooks = this.state.books.filter( book => book.shelf === 'currentlyReading');
-      this.setState( {currentBooks: currentlyReadingBooks} );
+      //const currentlyReadingBooks = this.state.books.filter( book => book.shelf === 'currentlyReading');
+      //this.setState( {currentBooks: currentlyReadingBooks} );
 
       //const wantToReadBooks = this.state.books.filter( book => book.shelf === 'wantToRead');
       //const readBooks = this.state.books.filter( book => book.shelf === 'read');
@@ -76,7 +76,7 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <Shelf shelfName="Current Books" books={this.state.currentBooks} />
+                <Shelf shelfName="Current Books" books={this.state.books} />
                 <Shelf shelfName="Shelf 2"/>
                 <Shelf shelfName="Shelf 3"/>
                 <div className="bookshelf">

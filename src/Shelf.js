@@ -1,13 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react';
 import Book from './Book'
-import PropTypes from 'prop-types'
+/*import PropTypes from 'prop-types'*/
 /*import * as BooksAPI from './BooksAPI'*/
 
-class Shelf extends Component {
-  static PropTypes = {
-    books: PropTypes.array.isRequired,
-    shelfName: PropTypes.string.isRequired
-  }
+class Shelf extends React.Component {
+
 
   state = {
 
@@ -17,14 +14,17 @@ class Shelf extends Component {
   render() {
 
 
-    const { books, shelfName } = this.props
+
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{shelfName}</h2>
+        <h2 className="bookshelf-title">{this.props.shelfName}</h2>
+
         <div className="bookshelf-books">
           <ol className="books-grid">
-
+            {this.props.books.map((book) => (
+              <Book key={book.id} />
+            ))}
           </ol>
         </div>
       </div>
