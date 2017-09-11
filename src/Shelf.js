@@ -13,11 +13,11 @@ class Shelf extends React.Component {
 
   render() {
 
-
+  /* compare books array with shelfId and bass books that have matches to the <Book/> component */
 
 
     return (
-      <div className="bookshelf">
+      <div className="bookshelf" id="{this.props.shelfId}">
         <h2 className="bookshelf-title">{this.props.shelfName}</h2>
 
         <div className="bookshelf-books">
