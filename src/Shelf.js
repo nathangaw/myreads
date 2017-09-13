@@ -13,17 +13,16 @@ class Shelf extends React.Component {
 
   render() {
 
-  /* compare books array with shelfId and bass books that have matches to the <Book/> component */
-
-
     return (
       <div className="bookshelf" id="{this.props.shelfId}">
         <h2 className="bookshelf-title">{this.props.shelfName}</h2>
 
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.props.books.map((book) => (
-              <Book key={book.id} />
+            {/* filter books array, only returning books whose shelf property matches the id of the shelf. Then map over output creating a Book component for each book */}
+            { this.props.books.filter( book => this.props.shelfId === book.shelf )
+              .map((book) => (
+              <Book key={book.id} id={book.id} title={book.title} authors={book.authors} jacket={book.imageLinks.thumbnail} updateBooks={this.props.updateBooks} shelfValue={book.shelf}/>
             ))}
           </ol>
         </div>
