@@ -3,6 +3,8 @@ import React from 'react';
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import { Link } from 'react-router-dom'
+import InputBoxDoneTyping from 'react-input-box-done-typing';
+
 
 class Search extends React.Component {
 
@@ -24,6 +26,7 @@ class Search extends React.Component {
     // create array of book objects that are in both search results and shelves
     let crossoverBooks = this.props.books.filter( result => intersection.has(result.id) )
 
+    // only worry about books on shelves if there are some
     if (crossoverBooks.length) {
 
       // convert intersection Set to array for use below
@@ -50,6 +53,7 @@ class Search extends React.Component {
 
     } else {
 
+      // if no books on shelves are in search results give every book a shelf of 'none'
       let searchWithShelf = this.state.searchResults.map ( result => {
         result.shelf = "none"
         return result
@@ -58,29 +62,43 @@ class Search extends React.Component {
       this.setState({
         searchResults: searchWithShelf
       })
-
     }
+  }
 
-
+  resetSearch = () => {
+    console.log('search resetting')
+    this.setState( {
+      query: '',
+      searchResults: []
+    })
   }
 
   getResults = (query) => {
-    this.setState( {
-      query: query
-    })
-
-    BooksAPI.search(query, 20).then((searchResults) => {
+    if (query.length) {
       this.setState( {
-        searchResults
-      },
-      this.compareSearchShelf
-      )
-    })
+        query: query
+      })
+
+      BooksAPI.search(query, 20)
+      .then((searchResults) => {
+        if (searchResults === null || searchResults === undefined || searchResults.error) {
+          alert('Unfortunately there is a problem with your search. Please try something else.')
+        } else {
+          console.log(searchResults)
+          this.setState( {
+            searchResults
+          },
+          this.compareSearchShelf
+          )
+        }
+      })
+      .catch(e => console.log(e))
+    } else {
+      this.resetSearch()
+    }
   }
 
   render() {
-
-    const { query } = this.state
 
     return (
       <div className="search-books">
@@ -91,14 +109,22 @@ class Search extends React.Component {
               >Close</Link>
 
           <div className="search-books-input-wrapper">
-            <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => this.getResults(event.target.value)}/>
+
+            {/* component to stop API call until typing has stopped */}
+            <InputBoxDoneTyping
+            id="input-box-done-typing"
+            className="form-control"
+            placeholder="Search by title or author"
+            doneTyping={(value) => this.getResults(value)}
+            doneTypingInterval={500}
+            />
 
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
             { this.state.searchResults.map((book) => (
-              <Book key={book.id} id={book.id} title={book.title} authors={book.authors} jacket={book.imageLinks.thumbnail} updateBooks={this.props.updateBooks} shelfValue={book.shelf} />))
+              <Book key={book.id} id={book.id} title={book.title} authors={book.authors} jacket={book.imageLinks} updateBooks={this.props.updateBooks} shelfValue={book.shelf} />))
             }
 
           </ol>

@@ -12,7 +12,11 @@ class Book extends Component {
       <li>
         <div className="book">
           <div className="book-top">
-            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.jacket})` }}></div>
+            <div className="book-cover" style={{
+              width: 128,
+              height: 193,
+              backgroundImage: "url(" + (this.props.jacket ? this.props.jacket.thumbnail : "https://books.google.com/googlebooks/images/no_cover_thumb.gif") + ")" }}>
+            </div>
             <div className="book-shelf-changer">
               <select value={this.props.shelfValue} onChange={(event) => updateBooks(id, event.target.value)}>
                 <option value="none" disabled>Move to...</option>
@@ -23,19 +27,17 @@ class Book extends Component {
               </select>
             </div>
           </div>
-          <div className="book-title">{this.props.title}</div>
-          <div className="book-authors">{this.props.authors}</div>
+          <div className="book-title">{this.props.title}
+          </div>
+          <div className="book-authors">
+          {/* { this.props.authors.length < 1 ? ( this.props.authors ) : (this.props.authors.join(', ')) } */}
+          { this.props.authors }
+          </div>
         </div>
       </li>
 
-
     )
   }
-
-
-
-
-
 
 }
 

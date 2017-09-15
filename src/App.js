@@ -25,14 +25,13 @@ class BooksApp extends React.Component {
   updateBooksState = (clickedBook, newShelf) => {
     const updatedBooksArray = this.state.books.map( (book) => {
       if (book.id === clickedBook) {
-          book.shelf = newShelf
-          BooksAPI.update(book, newShelf)
-          return book
-        } else {
-          return book
-        }
+        book.shelf = newShelf
+        BooksAPI.update(book, newShelf)
+        return book
+      } else {
+        return book
       }
-    )
+    })
 
     this.setState({
       books: updatedBooksArray
@@ -80,7 +79,8 @@ class BooksApp extends React.Component {
 
       </div>
 
-  )}
+    )
+  }
 }
 
 export default BooksApp
