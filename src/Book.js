@@ -12,6 +12,7 @@ class Book extends Component {
       <li>
         <div className="book">
           <div className="book-top">
+            {/* missing thumbnail fix from matiaslgh on slack channel */}
             <div className="book-cover" style={{
               width: 128,
               height: 193,
