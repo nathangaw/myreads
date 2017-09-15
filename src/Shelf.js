@@ -5,12 +5,6 @@ import Book from './Book'
 
 class Shelf extends React.Component {
 
-
-  state = {
-
-
-  }
-
   render() {
 
     return (
