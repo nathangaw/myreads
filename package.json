@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-input-box-done-typing": "^2.2.1",
