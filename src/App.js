@@ -23,10 +23,11 @@ class BooksApp extends React.Component {
 
   // update book shelf state and API
   updateBooksState = (clickedBook, newShelf) => {
+    console.log(clickedBook, newShelf)
     const updatedBooksArray = this.state.books.map( (book) => {
       if (book.id === clickedBook) {
         book.shelf = newShelf
-        BooksAPI.update(book, newShelf)
+        BooksAPI.update(book.id, newShelf)
         return book
       } else {
         return book

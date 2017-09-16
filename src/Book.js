@@ -30,8 +30,7 @@ class Book extends Component {
           <div className="book-title">{this.props.title}
           </div>
           <div className="book-authors">
-          {/* { this.props.authors.length < 1 ? ( this.props.authors ) : (this.props.authors.join(', ')) } */}
-          { this.props.authors }
+          { this.props.authors ? this.props.authors.join(', ') : '' }
           </div>
         </div>
       </li>
