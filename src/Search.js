@@ -1,9 +1,8 @@
 import React from 'react';
-/*import PropTypes from 'prop-types'*/
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
 import { Link } from 'react-router-dom'
-import InputBoxDoneTyping from 'react-input-box-done-typing';
+import InputBoxDoneTyping from 'react-input-box-done-typing'
 
 
 class Search extends React.Component {
